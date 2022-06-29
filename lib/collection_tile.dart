@@ -15,9 +15,7 @@ class CollectionTile extends StatelessWidget {
           color: collection!.color, borderRadius: BorderRadius.circular(25)),
       child: Stack(
         children: [
-          Image.network(
-            collection!.imageUrl!,
-          ),
+          Image.asset("assets/collections/${collection!.imageUrl!}"),
           Positioned(
               bottom: 15,
               right: 25,

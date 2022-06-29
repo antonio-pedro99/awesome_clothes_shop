@@ -4,7 +4,6 @@ import 'package:awesome_clother_shop/collection_tile.dart';
 import 'package:awesome_clother_shop/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -76,9 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child:
                     CollectionTile(collection: Collection.colletions()[index]),
                 onTap: () {
-                  Scaffold.of(context).showBottomSheet((context) {
-                    return const SingleChildScrollView();
-                  });
+                  openBottomSheet(context, Collection.colletions()[index]);
                 },
               );
             }),
@@ -90,4 +87,18 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+void openBottomSheet(BuildContext context, Collection collection) {
+  showModalBottomSheet(
+      backgroundColor: collection.color,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+      elevation: 3,
+      context: context,
+      //isScrollControlled: true,
+      builder: (context) {
+        return Container();
+      });
 }
