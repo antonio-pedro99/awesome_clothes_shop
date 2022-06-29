@@ -35,14 +35,17 @@ class ProductDetails extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              Container(
-                margin: const EdgeInsets.all(5),
-                width: size.width,
-                height: size.height * .6,
-                decoration: BoxDecoration(
-                    color: const Color.fromRGBO(171, 210, 176, 1),
-                    borderRadius: BorderRadius.circular(25)),
-                child: Image.asset("assets/photos/${product!.imageUrl!}"),
+              Hero(
+                tag: product!.productName!,
+                child: Container(
+                  margin: const EdgeInsets.all(5),
+                  width: size.width,
+                  height: size.height * .6,
+                  decoration: BoxDecoration(
+                      color: const Color.fromRGBO(171, 210, 176, 1),
+                      borderRadius: BorderRadius.circular(25)),
+                  child: Image.asset("assets/photos/${product!.imageUrl!}"),
+                ),
               ),
               const SizedBox(height: 10),
               bottom(size, product!)
