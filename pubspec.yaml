@@ -64,6 +64,7 @@ flutter:
     - assets/collections/children.png
     - assets/collections/men.png
     - assets/collections/woman.png
+    - assets/photos/photo1.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

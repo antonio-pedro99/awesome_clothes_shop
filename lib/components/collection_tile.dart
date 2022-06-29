@@ -1,4 +1,4 @@
-import 'package:awesome_clother_shop/models.dart';
+import 'package:awesome_clother_shop/models/collection.dart';
 import 'package:flutter/material.dart';
 
 class CollectionTile extends StatelessWidget {
