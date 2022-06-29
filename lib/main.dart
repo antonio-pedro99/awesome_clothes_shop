@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:awesome_clother_shop/collection_tile.dart';
 import 'package:awesome_clother_shop/models.dart';
+import 'package:awesome_clother_shop/product_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,8 +25,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Awesome Clothes Shop',
       debugShowCheckedModeBanner: false,
-      theme:
-          ThemeData(backgroundColor: Colors.white, primarySwatch: Colors.grey),
+      theme: ThemeData(
+          textTheme: GoogleFonts.tajawalTextTheme(),
+          backgroundColor: Colors.white,
+          primarySwatch: Colors.grey),
       home: const MyHomePage(title: 'Collection'),
     );
   }
@@ -90,15 +94,39 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 void openBottomSheet(BuildContext context, Collection collection) {
+  var size = MediaQuery.of(context).size;
   showModalBottomSheet(
-      backgroundColor: collection.color,
+      constraints:
+          BoxConstraints(maxHeight: size.height * .88, minWidth: size.width),
+      backgroundColor:
+          collection.secundary, //const Color.fromRGBO(248, 247, 243, 1),
+      isScrollControlled: true,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+              topLeft: Radius.circular(35), topRight: Radius.circular(35))),
       elevation: 3,
+      barrierColor: Colors.transparent,
       context: context,
       //isScrollControlled: true,
       builder: (context) {
-        return Container();
+        return Padding(
+            padding: const EdgeInsets.fromLTRB(8.0, 20, 8.0, 8.0),
+            child: Column(
+              children: [
+                Text(
+                  "${collection.collectionName}'s Collection",
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w900, fontSize: 20),
+                ),
+                const SizedBox(height: 35),
+                Flexible(
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return const ProductTile();
+                        }))
+              ],
+            ));
       });
 }
