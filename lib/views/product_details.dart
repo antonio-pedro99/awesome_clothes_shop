@@ -1,81 +1,170 @@
+import 'dart:ui';
+
+import 'package:awesome_clother_shop/components/add_to_cart_tile.dart';
 import 'package:awesome_clother_shop/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProductDetails extends StatelessWidget {
+const _maxHeight = 250.0;
+const _minHeight = 70.0;
+
+class ProductDetails extends StatefulWidget {
   const ProductDetails({Key? key, this.product}) : super(key: key);
 
   final Product? product;
+
+  @override
+  State<ProductDetails> createState() => _ProductDetailsState();
+}
+
+class _ProductDetailsState extends State<ProductDetails>
+    with SingleTickerProviderStateMixin {
+  late AnimationController animationController;
+  bool _animationStopped = false;
+
+  @override
+  void initState() {
+    animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    var buttonSize = size.width * .5;
+
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: NestedScrollView(
-          floatHeaderSlivers: true,
-          headerSliverBuilder: ((context, innerBoxIsScrolled) {
-            return <Widget>[
-              SliverAppBar(
-                expandedHeight: 100,
-                forceElevated: innerBoxIsScrolled,
-                actions: [
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.favorite_border_outlined,
-                        size: 30,
-                        color: Colors.black87,
-                      ))
-                ],
-              )
-            ];
-          }),
-          body: ListView(
-            padding: const EdgeInsets.all(10),
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              Hero(
-                tag: product!.productName!,
-                child: Container(
-                  margin: const EdgeInsets.all(5),
-                  width: size.width,
-                  height: size.height * .6,
-                  decoration: BoxDecoration(
-                      color: const Color.fromRGBO(171, 210, 176, 1),
-                      borderRadius: BorderRadius.circular(25)),
-                  child: Image.asset("assets/photos/${product!.imageUrl!}"),
+        backgroundColor: Colors.white,
+        body: NestedScrollView(
+            floatHeaderSlivers: true,
+            headerSliverBuilder: ((context, innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  expandedHeight: 100,
+                  forceElevated: innerBoxIsScrolled,
+                  actions: [
+                    IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.favorite_border_outlined,
+                          size: 30,
+                          color: Colors.black87,
+                        ))
+                  ],
+                )
+              ];
+            }),
+            body: ListView(
+              padding: const EdgeInsets.all(10),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                Hero(
+                  tag: widget.product!.productName!,
+                  child: Container(
+                    margin: const EdgeInsets.all(5),
+                    width: size.width,
+                    height: size.height * .6,
+                    decoration: BoxDecoration(
+                        color: const Color.fromRGBO(171, 210, 176, 1),
+                        borderRadius: BorderRadius.circular(25)),
+                    child: Image.asset(
+                        "assets/photos/${widget.product!.imageUrl!}"),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              bottom(size, product!)
-            ],
-          )),
-      extendBody: true,
-      bottomNavigationBar: buyButton(size),
-    );
+                const SizedBox(height: 10),
+                bottom(size, widget.product!)
+              ],
+            )),
+        extendBody: true,
+        bottomNavigationBar: GestureDetector(
+          onTap: () {
+            setState(() {
+              _animationStopped = !_animationStopped;
+            });
+
+            if (_animationStopped) {
+              animationController.reverse();
+            } else {
+              animationController.forward();
+            }
+          },
+          child: AnimatedBuilder(
+              animation: animationController,
+              builder: (context, snapshot) {
+                var value = animationController.value;
+                return Stack(
+                  children: [
+                    Positioned(
+                      height: lerpDouble(_maxHeight, _minHeight, value),
+                      bottom: lerpDouble(0, 15, value),
+                      left:
+                          lerpDouble(0, size.width / 2 - buttonSize / 2, value),
+                      width: lerpDouble(size.width, buttonSize, value),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.vertical(
+                                top: const Radius.circular(25),
+                                bottom: Radius.circular(
+                                    lerpDouble(0, 25, value)!))),
+                        child: (_animationStopped)
+                            ? const AddToCartTile()
+                            : Center(
+                                child: Text("Move to Cart",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.tajawal(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w400)),
+                              ),
+                      ),
+                    ),
+                  ],
+                );
+              }),
+        ));
   }
 }
 
-Widget buyButton(Size size) {
-  return Stack(children: [
-    Positioned(
-        bottom: 15,
-        height: 70,
-        left: size.width * 0.23,
-        child: Container(
-            width: 200,
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                color: Colors.black, borderRadius: BorderRadius.circular(25)),
-            child: Text("Move to Cart",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.tajawal(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400))))
-  ]);
+Widget buyButton(Size size, AnimationController controller, bool status) {
+  var value = controller.value;
+  return AnimatedBuilder(
+    animation: controller,
+    builder: (context, snapshot) {
+      return Stack(children: [
+        Positioned(
+            bottom: lerpDouble(0, 15, value),
+            height: lerpDouble(350, 70, value),
+            left:
+                lerpDouble(0, size.width / 2 - (size.width * 0.23) / 2, value),
+            width: lerpDouble(size.width, size.width * 0.23, value),
+            child: Container(
+                // width: 200,
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius:
+                        BorderRadius.circular(lerpDouble(0, 25, value)!)),
+                child: !status
+                    ? Container()
+                    : Text("Move to Cart",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.tajawal(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400))))
+      ]);
+    },
+  );
 }
 
 Widget bottom(Size size, Product product) {
