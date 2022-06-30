@@ -66,7 +66,7 @@ class _ProductDetailsState extends State<ProductDetails>
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 Hero(
-                  tag: widget.product!.productName!,
+                  tag: widget.product!,
                   child: Container(
                     margin: const EdgeInsets.all(5),
                     width: size.width,
@@ -131,39 +131,6 @@ class _ProductDetailsState extends State<ProductDetails>
               }),
         ));
   }
-}
-
-Widget buyButton(Size size, AnimationController controller, bool status) {
-  var value = controller.value;
-  return AnimatedBuilder(
-    animation: controller,
-    builder: (context, snapshot) {
-      return Stack(children: [
-        Positioned(
-            bottom: lerpDouble(0, 15, value),
-            height: lerpDouble(350, 70, value),
-            left:
-                lerpDouble(0, size.width / 2 - (size.width * 0.23) / 2, value),
-            width: lerpDouble(size.width, size.width * 0.23, value),
-            child: Container(
-                // width: 200,
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius:
-                        BorderRadius.circular(lerpDouble(0, 25, value)!)),
-                child: !status
-                    ? Container()
-                    : Text("Move to Cart",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.tajawal(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400))))
-      ]);
-    },
-  );
 }
 
 Widget bottom(Size size, Product product) {

@@ -1,7 +1,6 @@
-import 'dart:math';
 import 'package:awesome_clother_shop/components/collection_tile.dart';
 import 'package:awesome_clother_shop/models/collection.dart';
-import 'package:awesome_clother_shop/models/product.dart';
+import 'package:awesome_clother_shop/views/cart.dart';
 import 'package:awesome_clother_shop/views/product_details.dart';
 import 'package:awesome_clother_shop/components/product_tile.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return const CartPage();
+                }));
+              },
               icon: const Icon(
                 Icons.shopping_bag_outlined,
                 size: 30,
@@ -39,10 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
             itemCount: Collection.colletions().length,
             itemBuilder: (context, index) {
               return InkWell(
-                child: Hero(
-                    tag: "box",
-                    child: CollectionTile(
-                        collection: Collection.colletions()[index])),
+                child:
+                    CollectionTile(collection: Collection.colletions()[index]),
                 onTap: () {
                   openBottomSheet(context, Collection.colletions()[index]);
                 },
@@ -57,13 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-Product _product = Product(
-    productName: "It is a long established fact that.",
-    price: ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
-    description:
-        "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
-    imageUrl: "g1.png");
 
 void openBottomSheet(BuildContext context, Collection collection) {
   var size = MediaQuery.of(context).size;

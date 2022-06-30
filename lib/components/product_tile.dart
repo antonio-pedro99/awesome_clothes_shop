@@ -12,7 +12,7 @@ class ProductTile extends StatelessWidget {
     return Column(
       children: [
         Hero(
-          tag: product!.productName!,
+          tag: product!,
           child: Container(
             margin: const EdgeInsets.all(10),
             height: size.height * .54,

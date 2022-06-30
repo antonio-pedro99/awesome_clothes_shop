@@ -36,6 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^10.1.0
   google_fonts: ^3.0.1
+  http: ^0.13.4
+  location: ^4.4.0
+  provider: ^6.0.3
+  flutter_slidable: ^1.3.0
 
 dev_dependencies:
   flutter_test:
