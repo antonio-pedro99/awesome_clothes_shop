@@ -223,3 +223,7 @@ Widget bottom(Size size, Product product) {
     ),
   );
 }
+
+Widget _bottomNavigationBar() {
+  return Container();
+}

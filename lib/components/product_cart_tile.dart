@@ -10,6 +10,7 @@ class ProductInCartTile extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.only(bottom: 10),
       width: size.width,
       decoration: BoxDecoration(
           color: const Color.fromRGBO(248, 247, 243, 1),
@@ -19,7 +20,7 @@ class ProductInCartTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _buildProductImage(product),
-          const SizedBox(width: 8),
+          const SizedBox(width: 15),
           Flexible(child: _buildProductDetails(product)),
           _buildQuantitySelector(product)
         ],
@@ -71,7 +72,7 @@ Widget _buildQuantitySelector(Product? product) {
       const Text(
         "2",
         textAlign: TextAlign.center,
-        style: TextStyle(fontWeight: FontWeight.w700, fontSize: 22),
+        style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
       ),
       IconButton(onPressed: () {}, icon: const Icon(Icons.add, size: 20))
     ],
