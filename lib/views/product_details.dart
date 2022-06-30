@@ -20,12 +20,12 @@ class ProductDetails extends StatefulWidget {
 class _ProductDetailsState extends State<ProductDetails>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
-  bool _animationStopped = false;
+  bool _animationStopped = true;
 
   @override
   void initState() {
-    animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 600));
     super.initState();
   }
 
@@ -47,7 +47,6 @@ class _ProductDetailsState extends State<ProductDetails>
             headerSliverBuilder: ((context, innerBoxIsScrolled) {
               return <Widget>[
                 SliverAppBar(
-                  expandedHeight: 100,
                   forceElevated: innerBoxIsScrolled,
                   actions: [
                     IconButton(
@@ -103,19 +102,19 @@ class _ProductDetailsState extends State<ProductDetails>
                 return Stack(
                   children: [
                     Positioned(
-                      height: lerpDouble(_maxHeight, _minHeight, value),
-                      bottom: lerpDouble(0, 15, value),
+                      height: lerpDouble(_minHeight, _maxHeight, value),
+                      bottom: lerpDouble(15, 0, value),
                       left:
-                          lerpDouble(0, size.width / 2 - buttonSize / 2, value),
-                      width: lerpDouble(size.width, buttonSize, value),
+                          lerpDouble(size.width / 2 - buttonSize / 2, 0, value),
+                      width: lerpDouble(buttonSize, size.width, value),
                       child: Container(
                         decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.vertical(
                                 top: const Radius.circular(25),
                                 bottom: Radius.circular(
-                                    lerpDouble(0, 25, value)!))),
-                        child: (_animationStopped)
+                                    lerpDouble(25, 0, value)!))),
+                        child: (!_animationStopped)
                             ? const AddToCartTile()
                             : Center(
                                 child: Text("Move to Cart",
