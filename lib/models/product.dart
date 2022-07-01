@@ -4,7 +4,7 @@ class Product {
   String? imageUrl;
   String? productName, description;
   Color? color;
-  String? price;
+  double? price;
 
   Product(
       {this.productName,

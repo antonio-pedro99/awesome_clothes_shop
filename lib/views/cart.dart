@@ -1,9 +1,11 @@
 import 'dart:math';
 
 import 'package:awesome_clother_shop/components/product_cart_tile.dart';
+import 'package:awesome_clother_shop/models/providers/cart.dart';
 import 'package:awesome_clother_shop/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -32,27 +34,24 @@ class CartPage extends StatelessWidget {
                 ProductInCartTile(
                     product: Product(
                         productName: "Kids Lorem Ipsum it is kunt what",
-                        price: ((Random().nextDouble() * 1000) + 200.0)
-                            .toStringAsFixed(2),
+                        price: (Random().nextDouble() * 1000) + 200.0,
                         description:
                             "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                         imageUrl: "k1.png")),
                 ProductInCartTile(
                     product: Product(
                         productName: "Kids Lorem Ipsum it is kunt what",
-                        price: ((Random().nextDouble() * 1000) + 200.0)
-                            .toStringAsFixed(2),
+                        price: (Random().nextDouble() * 1000) + 200.0,
                         description:
                             "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                         imageUrl: "k1.png")),
                 ProductInCartTile(
                     product: Product(
                         productName: "Kids Lorem Ipsum it is kunt what",
-                        price: ((Random().nextDouble() * 1000) + 200.0)
-                            .toStringAsFixed(2),
+                        price: (Random().nextDouble() * 1000) + 200.0,
                         description:
                             "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
-                        imageUrl: "k1.png")),
+                        imageUrl: "k1.png"))
               ],
             )),
         extendBody: true,
@@ -92,10 +91,14 @@ Widget _bottomNavigator(BuildContext context, Size size) {
                                 color: Colors.black54,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400)),
-                        const Text(
-                          "\$345.00",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 24),
+                        Consumer<CartModel>(
+                          builder: ((context, value, child) {
+                            return Text(
+                              "\$${value.total}",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 24),
+                            );
+                          }),
                         ),
                       ],
                     ),

@@ -1,10 +1,14 @@
+import 'package:awesome_clother_shop/models/providers/cart.dart';
 import 'package:awesome_clother_shop/views/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+      providers: [ChangeNotifierProvider(create: (context) => CartModel())],
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

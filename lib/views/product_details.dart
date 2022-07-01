@@ -167,7 +167,7 @@ Widget bottom(Size size, Product product) {
                 ],
               ),
             ),
-            Text("\$ ${product.price!}",
+            Text("\$ ${product.price!.toStringAsFixed(2)}",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.tajawal(
                     color: Colors.black,

@@ -11,14 +11,9 @@ class _SizeSelecterState extends State<SizeSelecter> {
   @override
   Widget build(BuildContext context) {
     var sizes = ["S", "M", "L", "L", "LL", "XL", "LL", "XL", "LL", "XL"];
-    int _currentSize = 0;
     return ListTile(
       leading: GestureDetector(
-        onTap: () {
-          setState(() {
-            _currentSize -= 1;
-          });
-        },
+        onTap: () {},
         child: Container(
           height: 30,
           width: 30,
@@ -31,14 +26,10 @@ class _SizeSelecterState extends State<SizeSelecter> {
         ),
       ),
       title: Center(
-          child: Text(sizes[_currentSize],
+          child: Text(sizes[0],
               style: const TextStyle(fontSize: 28, color: Colors.white))),
       trailing: GestureDetector(
-        onTap: () {
-          setState(() {
-            _currentSize++;
-          });
-        },
+        onTap: () {},
         child: Container(
           height: 30,
           width: 30,

@@ -8,6 +8,7 @@ class AddToCartTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
     return ListView(
       padding: EdgeInsets.only(
           top: size.height * .04,

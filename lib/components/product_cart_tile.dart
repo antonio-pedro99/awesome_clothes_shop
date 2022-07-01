@@ -51,7 +51,7 @@ Widget _buildProductDetails(Product? product) {
       ),
       const SizedBox(height: 8),
       Text(
-        "\$${product.price}",
+        "\$${product.price!.toStringAsFixed(2)}",
         style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
       ),
     ],

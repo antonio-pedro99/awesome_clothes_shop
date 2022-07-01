@@ -26,43 +26,37 @@ class Collection {
           products: <Product>[
             Product(
                 productName: "Kids Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "k1.png"),
             Product(
                 productName: "Kids Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "k2.png"),
             Product(
                 productName: "Kids Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "k3.png"),
             Product(
                 productName: "Kids Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "k4.png"),
             Product(
                 productName: "Kids Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "k5.png"),
             Product(
                 productName: "Kids Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "k6.png"),
@@ -75,78 +69,67 @@ class Collection {
           products: <Product>[
             Product(
                 productName: "Men Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "m3.png"),
             Product(
                 productName: "Men Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "m4.png"),
             Product(
                 productName: "Men Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "m5.png"),
             Product(
                 productName: "Men Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "m6.png"),
             Product(
                 productName: "Men Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "m7.png"),
             Product(
                 productName: "Men Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "m8.png"),
             Product(
                 productName: "Men Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "m9.png"),
             Product(
                 productName: "Men Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "m10.png"),
             Product(
                 productName: "Men Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "m11.png"),
             Product(
                 productName: "Men Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "m2.png"),
             Product(
                 productName: "Men Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "m1.png"),
@@ -159,71 +142,61 @@ class Collection {
           products: <Product>[
             Product(
                 productName: "Girls Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "g3.png"),
             Product(
                 productName: "Girls Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "g4.png"),
             Product(
                 productName: "Girls Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "g5.png"),
             Product(
                 productName: "Girls Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "g6.png"),
             Product(
                 productName: "Men Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "g7.png"),
             Product(
                 productName: "Men Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "g8.png"),
             Product(
                 productName: "Girls Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "g9.png"),
             Product(
                 productName: "Men Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "g10.png"),
             Product(
                 productName: "Girls Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "g2.png"),
             Product(
                 productName: "Girls Lorem Ipsum it is kunt what",
-                price:
-                    ((Random().nextDouble() * 1000) + 200.0).toStringAsFixed(2),
+                price: (Random().nextDouble() * 1000) + 200.0,
                 description:
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
                 imageUrl: "g1.png"),
