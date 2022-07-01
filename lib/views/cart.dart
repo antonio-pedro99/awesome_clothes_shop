@@ -1,8 +1,6 @@
-import 'dart:math';
-
+import 'package:awesome_clother_shop/components/beautful_button.dart';
 import 'package:awesome_clother_shop/components/product_cart_tile.dart';
 import 'package:awesome_clother_shop/models/providers/cart.dart';
-import 'package:awesome_clother_shop/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -13,53 +11,47 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: NestedScrollView(
-            floatHeaderSlivers: true,
-            headerSliverBuilder: ((context, innerBoxIsScrolled) {
-              return <Widget>[
-                SliverAppBar(
-                  title: const Text("Cart"),
-                  centerTitle: true,
-                  forceElevated: innerBoxIsScrolled,
-                )
-              ];
-            }),
-            body: ListView(
-              padding: const EdgeInsets.all(10),
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                ProductInCartTile(
-                    product: Product(
-                        productName: "Kids Lorem Ipsum it is kunt what",
-                        price: (Random().nextDouble() * 1000) + 200.0,
-                        description:
-                            "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
-                        imageUrl: "k1.png")),
-                ProductInCartTile(
-                    product: Product(
-                        productName: "Kids Lorem Ipsum it is kunt what",
-                        price: (Random().nextDouble() * 1000) + 200.0,
-                        description:
-                            "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
-                        imageUrl: "k1.png")),
-                ProductInCartTile(
-                    product: Product(
-                        productName: "Kids Lorem Ipsum it is kunt what",
-                        price: (Random().nextDouble() * 1000) + 200.0,
-                        description:
-                            "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
-                        imageUrl: "k1.png"))
-              ],
-            )),
-        extendBody: true,
-        bottomNavigationBar: _bottomNavigator(context, size));
+    return Consumer<CartModel>(
+      builder: (context, cart, child) {
+        return Scaffold(
+            backgroundColor: Colors.white,
+            body: NestedScrollView(
+                floatHeaderSlivers: true,
+                headerSliverBuilder: ((context, innerBoxIsScrolled) {
+                  return <Widget>[
+                    SliverAppBar(
+                      title: const Text("Cart"),
+                      centerTitle: true,
+                      forceElevated: innerBoxIsScrolled,
+                    )
+                  ];
+                }),
+                body: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: !cart.isEmpty()
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: cart.itemsCount,
+                            itemBuilder: (context, index) {
+                              return ProductInCartTile(
+                                  cartProduct: cart.products[index]);
+                            })
+                        : Center(
+                            child: Text(
+                              "Cart is Empty",
+                              style: Theme.of(context).textTheme.headline4,
+                            ),
+                          ))),
+            extendBody: true,
+            bottomNavigationBar: !cart.isEmpty()
+                ? _bottomNavigator(context, size, cart)
+                : Container());
+      },
+    );
   }
 }
 
-Widget _bottomNavigator(BuildContext context, Size size) {
+Widget _bottomNavigator(BuildContext context, Size size, CartModel model) {
   return Stack(
     children: [
       Positioned(
@@ -68,7 +60,6 @@ Widget _bottomNavigator(BuildContext context, Size size) {
           bottom: 0,
           child: Container(
             padding: const EdgeInsets.all(10),
-            margin: const EdgeInsets.only(left: 15, right: 15),
             decoration: const BoxDecoration(
                 color: Colors.white,
                 border: Border.symmetric(
@@ -91,18 +82,17 @@ Widget _bottomNavigator(BuildContext context, Size size) {
                                 color: Colors.black54,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400)),
-                        Consumer<CartModel>(
-                          builder: ((context, value, child) {
-                            return Text(
-                              "\$${value.total}",
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 24),
-                            );
-                          }),
-                        ),
+                        Text(
+                          "\$${model.getTotal.toStringAsFixed(2)}",
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 24),
+                        )
                       ],
                     ),
-                    buttonBuy()
+                    BeautfulButton(
+                      label: "Buy Now",
+                      onPress: () {},
+                    )
                   ],
                 )
               ],
@@ -110,19 +100,4 @@ Widget _bottomNavigator(BuildContext context, Size size) {
           ))
     ],
   );
-}
-
-Widget buttonBuy() {
-  return Container(
-      height: 65,
-      width: 165,
-      decoration: BoxDecoration(
-          color: Colors.black, borderRadius: BorderRadius.circular(15)),
-      child: Center(
-          child: Text("Pay Now",
-              textAlign: TextAlign.center,
-              style: GoogleFonts.tajawal(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400))));
 }

@@ -7,26 +7,28 @@ class ItemSelecter extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Container(
-        height: 30,
-        width: 30,
+        height: 25,
+        width: 25,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.white), shape: BoxShape.circle),
         child: const Icon(
           Icons.remove_outlined,
           color: Colors.white,
+          size: 20,
         ),
       ),
       title: const Center(
           child:
-              Text("1", style: TextStyle(fontSize: 28, color: Colors.white))),
+              Text("1", style: TextStyle(fontSize: 24, color: Colors.white))),
       trailing: Container(
-        height: 30,
-        width: 30,
+        height: 25,
+        width: 25,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.white), shape: BoxShape.circle),
         child: const Icon(
           Icons.add_outlined,
           color: Colors.white,
+          size: 20,
         ),
       ),
     );

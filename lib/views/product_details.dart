@@ -1,11 +1,17 @@
 import 'dart:ui';
 
 import 'package:awesome_clother_shop/components/add_to_cart_tile.dart';
+import 'package:awesome_clother_shop/components/beautful_button.dart';
+import 'package:awesome_clother_shop/components/item_selecter.dart';
+import 'package:awesome_clother_shop/components/size_selecter.dart';
+import 'package:awesome_clother_shop/models/cart.dart';
 import 'package:awesome_clother_shop/models/product.dart';
+import 'package:awesome_clother_shop/models/providers/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-const _maxHeight = 250.0;
+const _maxHeight = 260.0;
 const _minHeight = 70.0;
 
 class ProductDetails extends StatefulWidget {
@@ -85,7 +91,7 @@ class _ProductDetailsState extends State<ProductDetails>
         extendBody: true,
         bottomNavigationBar: GestureDetector(
           onTap: () {
-            setState(() {
+            /*  setState(() {
               _animationStopped = !_animationStopped;
             });
 
@@ -93,7 +99,15 @@ class _ProductDetailsState extends State<ProductDetails>
               animationController.reverse();
             } else {
               animationController.forward();
-            }
+            } */
+
+            CartProduct _product = CartProduct(quantity: 1, size: "M");
+            _product.price = widget.product!.price;
+            _product.productName = widget.product!.productName;
+            _product.description = widget.product!.description;
+            _product.imageUrl = widget.product!.imageUrl;
+            _product.color = widget.product!.color;
+            Provider.of<CartModel>(context, listen: false).add(_product);
           },
           child: AnimatedBuilder(
               animation: animationController,
@@ -115,7 +129,13 @@ class _ProductDetailsState extends State<ProductDetails>
                                 bottom: Radius.circular(
                                     lerpDouble(25, 0, value)!))),
                         child: (!_animationStopped)
-                            ? const AddToCartTile()
+                            ? _myAnimatedBottomSheet(context, size, () {
+                                CartProduct _product =
+                                    widget.product as CartProduct;
+                                _product.quantity = 1;
+                                _product.size = "M";
+                                Provider.of<CartModel>(context).add(_product);
+                              })
                             : Center(
                                 child: Text("Move to Cart",
                                     textAlign: TextAlign.center,
@@ -226,4 +246,31 @@ Widget bottom(Size size, Product product) {
 
 Widget _bottomNavigationBar() {
   return Container();
+}
+
+Widget _myAnimatedBottomSheet(
+    BuildContext context, Size size, VoidCallback action) {
+  return ListView(
+    physics: const NeverScrollableScrollPhysics(),
+    padding: EdgeInsets.all(
+      size.height * .02,
+    ),
+    children: [
+      const Center(
+          child: Text(
+        "Quantity",
+        style: TextStyle(color: Colors.white, fontSize: 18),
+      )),
+      const ItemSelecter(),
+      const Center(
+        child: Text(
+          "Select Your Size",
+          style: TextStyle(color: Colors.white, fontSize: 18),
+        ),
+      ),
+      const SizeSelecter(),
+      const SizedBox(height: 10),
+      BeautfulButton(label: "Save", reversed: true, onPress: action)
+    ],
+  );
 }

@@ -15,29 +15,31 @@ class _SizeSelecterState extends State<SizeSelecter> {
       leading: GestureDetector(
         onTap: () {},
         child: Container(
-          height: 30,
-          width: 30,
+          height: 25,
+          width: 25,
           decoration: BoxDecoration(
               border: Border.all(color: Colors.white), shape: BoxShape.circle),
           child: const Icon(
             Icons.remove_outlined,
             color: Colors.white,
+            size: 20,
           ),
         ),
       ),
       title: Center(
           child: Text(sizes[0],
-              style: const TextStyle(fontSize: 28, color: Colors.white))),
+              style: const TextStyle(fontSize: 24, color: Colors.white))),
       trailing: GestureDetector(
         onTap: () {},
         child: Container(
-          height: 30,
-          width: 30,
+          height: 25,
+          width: 25,
           decoration: BoxDecoration(
               border: Border.all(color: Colors.white), shape: BoxShape.circle),
           child: const Icon(
             Icons.add_outlined,
             color: Colors.white,
+            size: 20,
           ),
         ),
       ),

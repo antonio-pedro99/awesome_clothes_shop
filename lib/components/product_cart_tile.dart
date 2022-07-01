@@ -1,10 +1,10 @@
-import 'package:awesome_clother_shop/models/product.dart';
+import 'package:awesome_clother_shop/models/cart.dart';
 import 'package:flutter/material.dart';
 
 class ProductInCartTile extends StatelessWidget {
-  const ProductInCartTile({Key? key, this.product}) : super(key: key);
+  const ProductInCartTile({Key? key, this.cartProduct}) : super(key: key);
 
-  final Product? product;
+  final CartProduct? cartProduct;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -19,46 +19,46 @@ class ProductInCartTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildProductImage(product),
+          _buildCartProductImage(cartProduct),
           const SizedBox(width: 15),
-          Flexible(child: _buildProductDetails(product)),
-          _buildQuantitySelector(product)
+          Flexible(child: _buildCartProductDetails(cartProduct)),
+          _buildQuantitySelector(cartProduct)
         ],
       ),
     );
   }
 }
 
-Widget _buildProductImage(Product? product) {
+Widget _buildCartProductImage(CartProduct? cartProduct) {
   return Container(
     height: 100,
     width: 100,
     decoration: BoxDecoration(
         color: const Color.fromRGBO(171, 210, 176, 1),
         borderRadius: BorderRadius.circular(25)),
-    child: Image.asset("assets/photos/${product!.imageUrl}"),
+    child: Image.asset("assets/photos/${cartProduct!.imageUrl}"),
   );
 }
 
-Widget _buildProductDetails(Product? product) {
+Widget _buildCartProductDetails(CartProduct? cartProduct) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        "${product!.productName}",
+        "${cartProduct!.productName}",
         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
       ),
       const SizedBox(height: 8),
       Text(
-        "\$${product.price!.toStringAsFixed(2)}",
+        "\$${cartProduct.price!.toStringAsFixed(2)}",
         style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
       ),
     ],
   );
 }
 
-Widget _buildQuantitySelector(Product? product) {
+Widget _buildQuantitySelector(CartProduct? cartProduct) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
@@ -69,10 +69,10 @@ Widget _buildQuantitySelector(Product? product) {
             Icons.remove,
             size: 20,
           )),
-      const Text(
-        "2",
+      Text(
+        "${cartProduct!.quantity}",
         textAlign: TextAlign.center,
-        style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
+        style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
       ),
       IconButton(onPressed: () {}, icon: const Icon(Icons.add, size: 20))
     ],
