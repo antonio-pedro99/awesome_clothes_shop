@@ -23,7 +23,15 @@ class CartPage extends StatelessWidget {
                       title: const Text("Cart"),
                       centerTitle: true,
                       forceElevated: innerBoxIsScrolled,
-                    )
+                      actions: [
+                        IconButton(
+                            onPressed: () {
+                              cart.clear();
+                            },
+                            icon: const Icon(Icons.delete_outline_outlined,
+                                size: 30))
+                      ],
+                    ),
                   ];
                 }),
                 body: Padding(

@@ -14,7 +14,7 @@ class ProductTile extends StatelessWidget {
         Hero(
           tag: product!,
           child: Container(
-            margin: const EdgeInsets.all(10),
+            margin: const EdgeInsets.only(top: 8, left: 8),
             height: size.height * .54,
             width: size.width * .7,
             decoration: BoxDecoration(

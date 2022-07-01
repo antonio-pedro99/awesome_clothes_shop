@@ -12,7 +12,7 @@ class BeautfulButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onDoubleTap: onPress,
+        onTap: onPress,
         child: Container(
             height: 65,
             width: 165,

@@ -2,7 +2,7 @@ import 'package:awesome_clother_shop/models/cart.dart';
 import 'package:flutter/cupertino.dart';
 
 class CartModel extends ChangeNotifier {
-  List<CartProduct> _products = [];
+  final List<CartProduct> _products = [];
   double total = 0.0;
 
   int itemQuantityStart = 1;
@@ -20,7 +20,7 @@ class CartModel extends ChangeNotifier {
   }
 
   void add(CartProduct product) {
-    if (!_products.contains(product)) {
+    if (!isInCar(product.productName!)) {
       _products.add(product);
     }
     notifyListeners();
@@ -48,5 +48,18 @@ class CartModel extends ChangeNotifier {
         (previousValue, element) =>
             previousValue + (element.price! * element.quantity!));
     return total;
+  }
+
+  void clear() {
+    _products.clear();
+    notifyListeners();
+  }
+
+  String productByItsName(String name) =>
+      _products[_products.indexWhere((element) => element.productName == name)]
+          .productName!;
+
+  bool isInCar(String name) {
+    return _products.any((element) => element.productName == name);
   }
 }

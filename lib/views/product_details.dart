@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:awesome_clother_shop/components/add_to_cart_tile.dart';
 import 'package:awesome_clother_shop/components/beautful_button.dart';
 import 'package:awesome_clother_shop/components/item_selecter.dart';
 import 'package:awesome_clother_shop/components/size_selecter.dart';
@@ -27,11 +26,14 @@ class _ProductDetailsState extends State<ProductDetails>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   bool _animationStopped = true;
+  bool _productInCar = false;
 
   @override
   void initState() {
     animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 600));
+    _productInCar = Provider.of<CartModel>(context, listen: false)
+        .isInCar(widget.product!.productName!);
     super.initState();
   }
 
@@ -47,109 +49,105 @@ class _ProductDetailsState extends State<ProductDetails>
     var buttonSize = size.width * .5;
 
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: NestedScrollView(
-            floatHeaderSlivers: true,
-            headerSliverBuilder: ((context, innerBoxIsScrolled) {
-              return <Widget>[
-                SliverAppBar(
-                  forceElevated: innerBoxIsScrolled,
-                  actions: [
-                    IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.favorite_border_outlined,
-                          size: 30,
-                          color: Colors.black87,
-                        ))
-                  ],
-                )
-              ];
-            }),
-            body: ListView(
-              padding: const EdgeInsets.all(10),
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+      backgroundColor: Colors.white,
+      body: NestedScrollView(
+          floatHeaderSlivers: true,
+          headerSliverBuilder: ((context, innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                forceElevated: innerBoxIsScrolled,
+                actions: [
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.favorite_border_outlined,
+                        size: 30,
+                        color: Colors.black87,
+                      ))
+                ],
+              )
+            ];
+          }),
+          body: ListView(
+            padding: const EdgeInsets.all(10),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              Hero(
+                tag: widget.product!,
+                child: Container(
+                  margin: const EdgeInsets.all(5),
+                  width: size.width,
+                  height: size.height * .6,
+                  decoration: BoxDecoration(
+                      color: const Color.fromRGBO(171, 210, 176, 1),
+                      borderRadius: BorderRadius.circular(25)),
+                  child:
+                      Image.asset("assets/photos/${widget.product!.imageUrl!}"),
+                ),
+              ),
+              const SizedBox(height: 10),
+              bottom(size, widget.product!)
+            ],
+          )),
+      extendBody: true,
+      bottomNavigationBar: AnimatedBuilder(
+          animation: animationController,
+          builder: (context, snapshot) {
+            var value = animationController.value;
+            return Stack(
               children: [
-                Hero(
-                  tag: widget.product!,
+                Positioned(
+                  height: lerpDouble(_minHeight, _maxHeight, value),
+                  bottom: lerpDouble(15, 0, value),
+                  left: lerpDouble(size.width / 2 - buttonSize / 2, 0, value),
+                  width: lerpDouble(buttonSize, size.width, value),
                   child: Container(
-                    margin: const EdgeInsets.all(5),
-                    width: size.width,
-                    height: size.height * .6,
                     decoration: BoxDecoration(
-                        color: const Color.fromRGBO(171, 210, 176, 1),
-                        borderRadius: BorderRadius.circular(25)),
-                    child: Image.asset(
-                        "assets/photos/${widget.product!.imageUrl!}"),
+                        color: Colors.black,
+                        borderRadius: BorderRadius.vertical(
+                            top: const Radius.circular(25),
+                            bottom:
+                                Radius.circular(lerpDouble(25, 0, value)!))),
+                    child: (!_animationStopped)
+                        ? _myAnimatedBottomSheet(context, size, () {
+                            setState(() {
+                              _animationStopped = true;
+                            });
+                            animationController.reverse();
+                            CartProduct _product =
+                                CartProduct(quantity: 1, size: "M");
+                            _product.price = widget.product!.price;
+                            _product.productName = widget.product!.productName;
+                            _product.description = widget.product!.description;
+                            _product.imageUrl = widget.product!.imageUrl;
+                            _product.color = widget.product!.color;
+                            Provider.of<CartModel>(context, listen: false)
+                                .add(_product);
+                          })
+                        : Center(
+                            child: GestureDetector(
+                              child: Text(
+                                  _productInCar ? "Customize" : "Move to Cart",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.tajawal(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w400)),
+                              onTap: () {
+                                setState(() {
+                                  _animationStopped = false;
+                                });
+                                animationController.forward();
+                              },
+                            ),
+                          ),
                   ),
                 ),
-                const SizedBox(height: 10),
-                bottom(size, widget.product!)
               ],
-            )),
-        extendBody: true,
-        bottomNavigationBar: GestureDetector(
-          onTap: () {
-            /*  setState(() {
-              _animationStopped = !_animationStopped;
-            });
-
-            if (_animationStopped) {
-              animationController.reverse();
-            } else {
-              animationController.forward();
-            } */
-
-            CartProduct _product = CartProduct(quantity: 1, size: "M");
-            _product.price = widget.product!.price;
-            _product.productName = widget.product!.productName;
-            _product.description = widget.product!.description;
-            _product.imageUrl = widget.product!.imageUrl;
-            _product.color = widget.product!.color;
-            Provider.of<CartModel>(context, listen: false).add(_product);
-          },
-          child: AnimatedBuilder(
-              animation: animationController,
-              builder: (context, snapshot) {
-                var value = animationController.value;
-                return Stack(
-                  children: [
-                    Positioned(
-                      height: lerpDouble(_minHeight, _maxHeight, value),
-                      bottom: lerpDouble(15, 0, value),
-                      left:
-                          lerpDouble(size.width / 2 - buttonSize / 2, 0, value),
-                      width: lerpDouble(buttonSize, size.width, value),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.vertical(
-                                top: const Radius.circular(25),
-                                bottom: Radius.circular(
-                                    lerpDouble(25, 0, value)!))),
-                        child: (!_animationStopped)
-                            ? _myAnimatedBottomSheet(context, size, () {
-                                CartProduct _product =
-                                    widget.product as CartProduct;
-                                _product.quantity = 1;
-                                _product.size = "M";
-                                Provider.of<CartModel>(context).add(_product);
-                              })
-                            : Center(
-                                child: Text("Move to Cart",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.tajawal(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w400)),
-                              ),
-                      ),
-                    ),
-                  ],
-                );
-              }),
-        ));
+            );
+          }),
+    );
   }
 }
 
