@@ -1,6 +1,7 @@
-import 'package:awesome_clother_shop/components/beautful_button.dart';
-import 'package:awesome_clother_shop/components/product_cart_tile.dart';
-import 'package:awesome_clother_shop/models/providers/cart.dart';
+
+import 'package:awesome_clother_shop/providers/cart.dart';
+import 'package:awesome_clother_shop/views/components/beautful_button.dart';
+import 'package:awesome_clother_shop/views/components/product_cart_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

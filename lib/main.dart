@@ -1,5 +1,6 @@
-import 'package:awesome_clother_shop/models/providers/cart.dart';
+import 'package:awesome_clother_shop/providers/cart.dart';
 import 'package:awesome_clother_shop/views/home.dart';
+import 'package:awesome_clother_shop/views/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';

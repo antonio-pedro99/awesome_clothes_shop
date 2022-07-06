@@ -1,10 +1,9 @@
-import 'dart:math' as math;
-import 'package:awesome_clother_shop/components/collection_tile.dart';
 import 'package:awesome_clother_shop/models/collection.dart';
-import 'package:awesome_clother_shop/models/providers/cart.dart';
+import 'package:awesome_clother_shop/providers/cart.dart';
 import 'package:awesome_clother_shop/views/cart.dart';
+import 'package:awesome_clother_shop/views/components/collection_tile.dart';
+import 'package:awesome_clother_shop/views/components/product_tile.dart';
 import 'package:awesome_clother_shop/views/product_details.dart';
-import 'package:awesome_clother_shop/components/product_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,61 +19,23 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late PageController pageController;
 
-  double offset = 0;
-
   @override
   void initState() {
     super.initState();
-    pageController = PageController(initialPage: 1, viewportFraction: .5);
+    pageController = PageController(viewportFraction: .8);
+  }
 
-    pageController.addListener(() => setState(() {
-          offset = pageController.page!;
-        }));
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(widget.title),
-        actions: [
-          Stack(
-            children: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return const CartPage();
-                    }));
-                  },
-                  icon: const Icon(
-                    Icons.shopping_bag_outlined,
-                    size: 30,
-                    color: Colors.black87,
-                  )),
-              Consumer<CartModel>(builder: (context, cart, child) {
-                return !cart.isEmpty()
-                    ? Positioned(
-                        height: 18,
-                        width: 18,
-                        right: 25,
-                        top: 15,
-                        child: Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: Colors.black),
-                          child: Text("${cart.itemsCount}",
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(color: Colors.white)),
-                        ))
-                    : Container();
-              })
-            ],
-          )
-        ],
-      ),
+      appBar: _buildAppBar(context, widget.title),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
@@ -85,8 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 child:
                     CollectionTile(collection: Collection.colletions()[index]),
                 onTap: () {
-                  openBottomSheet(context, Collection.colletions()[index],
-                      pageController, offset);
+                  openBottomSheet(
+                      context, Collection.colletions()[index], pageController);
                 },
               );
             }),
@@ -100,8 +61,52 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-void openBottomSheet(BuildContext context, Collection collection,
-    PageController controller, double scrollOffset) {
+
+AppBar _buildAppBar(BuildContext context, String title) {
+  return AppBar(
+    title: Text(title),
+    actions: [
+      Stack(
+        children: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return const CartPage();
+                }));
+              },
+              icon: const Icon(
+                Icons.shopping_bag_outlined,
+                size: 30,
+                color: Colors.black87,
+              )),
+          Consumer<CartModel>(builder: (context, cart, child) {
+            return !cart.isEmpty()
+                ? Positioned(
+                    height: 18,
+                    width: 18,
+                    right: 25,
+                    top: 15,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.black),
+                      child: Text("${cart.itemsCount}",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(color: Colors.white)),
+                    ))
+                : Container();
+          })
+        ],
+      )
+    ],
+  );
+}
+
+
+void openBottomSheet(
+    BuildContext context, Collection collection, PageController controller) {
   var size = MediaQuery.of(context).size;
   showModalBottomSheet(
       constraints:
@@ -126,35 +131,9 @@ void openBottomSheet(BuildContext context, Collection collection,
                     const TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
               ),
               const SizedBox(height: 24),
-              /*  PageView.builder(
-                  controller: controller,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: collection.products!.length,
-                  itemBuilder: (context, index) {
-                    return Align(
-                      alignment: Alignment(
-                          0,
-                          math.exp(-math.pow(scrollOffset - index, -4) /
-                              collection.products!.length)),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return ProductDetails(
-                                  product: collection.products![index]);
-                            }));
-                          },
-                          child: Container(
-                            height: 400,
-                            width: 400,
-                            margin: const EdgeInsets.only(left: 8),
-                            color: Colors.primaries[index],
-                          )),
-                    );
-                  }) */
-
               Flexible(
-                child: ListView.builder(
+                child: PageView.builder(
+                    controller: controller,
                     scrollDirection: Axis.horizontal,
                     itemCount: collection.products!.length,
                     itemBuilder: (context, index) {
@@ -173,7 +152,7 @@ void openBottomSheet(BuildContext context, Collection collection,
                             ),
                           ));
                     }),
-              )
+              ),
             ],
           ),
         );

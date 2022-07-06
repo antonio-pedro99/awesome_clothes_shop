@@ -1,6 +1,6 @@
-import 'package:awesome_clother_shop/components/beautful_button.dart';
-import 'package:awesome_clother_shop/components/item_selecter.dart';
-import 'package:awesome_clother_shop/components/size_selecter.dart';
+import 'package:awesome_clother_shop/views/components/beautful_button.dart';
+import 'package:awesome_clother_shop/views/components/item_selecter.dart';
+import 'package:awesome_clother_shop/views/components/size_selecter.dart';
 import 'package:flutter/material.dart';
 
 class AddToCartTile extends StatelessWidget {

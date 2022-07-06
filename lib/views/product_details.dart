@@ -1,11 +1,11 @@
 import 'dart:ui';
 
-import 'package:awesome_clother_shop/components/beautful_button.dart';
-import 'package:awesome_clother_shop/components/item_selecter.dart';
-import 'package:awesome_clother_shop/components/size_selecter.dart';
 import 'package:awesome_clother_shop/models/cart.dart';
 import 'package:awesome_clother_shop/models/product.dart';
-import 'package:awesome_clother_shop/models/providers/cart.dart';
+import 'package:awesome_clother_shop/providers/cart.dart';
+import 'package:awesome_clother_shop/views/components/beautful_button.dart';
+import 'package:awesome_clother_shop/views/components/item_selecter.dart';
+import 'package:awesome_clother_shop/views/components/size_selecter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -68,28 +68,7 @@ class _ProductDetailsState extends State<ProductDetails>
               )
             ];
           }),
-          body: ListView(
-            padding: const EdgeInsets.all(10),
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              Hero(
-                tag: widget.product!,
-                child: Container(
-                  margin: const EdgeInsets.all(5),
-                  width: size.width,
-                  height: size.height * .6,
-                  decoration: BoxDecoration(
-                      color: const Color.fromRGBO(171, 210, 176, 1),
-                      borderRadius: BorderRadius.circular(25)),
-                  child:
-                      Image.asset("assets/photos/${widget.product!.imageUrl!}"),
-                ),
-              ),
-              const SizedBox(height: 10),
-              bottom(size, widget.product!)
-            ],
-          )),
+          body: _buildBody(widget.product!, size)),
       extendBody: true,
       bottomNavigationBar: AnimatedBuilder(
           animation: animationController,
@@ -149,6 +128,30 @@ class _ProductDetailsState extends State<ProductDetails>
           }),
     );
   }
+}
+
+Widget _buildBody(Product product, Size size) {
+  return ListView(
+    padding: const EdgeInsets.all(10),
+    shrinkWrap: true,
+    physics: const NeverScrollableScrollPhysics(),
+    children: [
+      Hero(
+        tag: product,
+        child: Container(
+          margin: const EdgeInsets.all(5),
+          width: size.width,
+          height: size.height * .6,
+          decoration: BoxDecoration(
+              color: const Color.fromRGBO(171, 210, 176, 1),
+              borderRadius: BorderRadius.circular(25)),
+          child: Image.asset("assets/photos/${product.imageUrl!}"),
+        ),
+      ),
+      const SizedBox(height: 10),
+      bottom(size, product)
+    ],
+  );
 }
 
 Widget bottom(Size size, Product product) {
@@ -240,10 +243,6 @@ Widget bottom(Size size, Product product) {
       ],
     ),
   );
-}
-
-Widget _bottomNavigationBar() {
-  return Container();
 }
 
 Widget _myAnimatedBottomSheet(
