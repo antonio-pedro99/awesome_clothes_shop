@@ -1,16 +1,8 @@
-# awesome_clother_shop
+# Awesome Clothes App
 
-A new Flutter project.
+Basic Clothes App UI inspired by a shoot from Driblle.
 
-## Getting Started
+## Original
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![cceef46907e50892fea111202dc2b1d3](https://user-images.githubusercontent.com/42675180/178790391-db602ee4-3b42-4b15-8f9e-3019d80118d4.jpg)
